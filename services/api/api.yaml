@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: learn-cars-api
+  version: 1.0.0 
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  body-only:
+    validateRequestBody: true
+    validateRequestParameters: false
+x-amazon-apigateway-request-validator: all
+
+paths:
+  /cars:
+    get:
+      tags:
+        - Cars
+      summary: List all registered cars
+      description: List cars
+      responses:
+        '200':
+          description: Successful operation
+        '500':
+          description: Something went wrong. (Please try again!!)
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:lambda/cars-get/invocations
+components:
+  schemas:
+    Car:
+      type: object
+      required:
+        - brand
+        - model
+        - Registration
+      properties:
+        brand:
+          type: string
+          example: BMW
+        model:
+          type: string
+          example: x7
+        color:
+          type: string
+        Registration:
+          type: object
+          required:
+          - registrationId
+          - registrationDate
+          properties:
+            registrationId:
+              type: integer
+              format: int64
+              example: 10
+            registrationDate:
+              type: string
+              format: date-time

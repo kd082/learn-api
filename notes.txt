@@ -1,0 +1,12 @@
+
+---------- Installations ----------
+install swagger extension
+
+---------- Terminal Commands ----------
+mkdir <proj-name>
+cd <proj-name>
+cdk init app --language typescript
+pyenv local 3.9.13
+python -m venv .venv
+poetry install
+
