@@ -16,7 +16,8 @@ export class LearnApiStack extends cdk.Stack {
   });
 
   const lambdaNames = [
-    { name: 'cars-get', handler: 'handler.lambda_handler' }
+    { name: 'cars-get', handler: 'handler.lambda_handler' },
+    { name: 'cars-post', handler: 'handler.lambda_handler' }
   ];
 
   lambdaNames.forEach((lambdaConfig) => {

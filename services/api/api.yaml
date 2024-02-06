@@ -20,13 +20,28 @@ paths:
       description: List cars
       responses:
         '200':
-          description: Successful operation
+          description: Successful GET operation
         '500':
           description: Something went wrong. (Please try again!!)
       x-amazon-apigateway-integration:
         type: aws_proxy
         httpMethod: POST
         uri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:cars-get/invocations
+    post:
+      tags:
+        - Cars
+      summary: Save car information
+      description: Save car information
+      responses:
+        '200':
+          description: Successful POST operation
+        '500':
+          description: Something went wrong. (Please try again!!)
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:cars-post/invocations
+  
 components:
   schemas:
     Car:

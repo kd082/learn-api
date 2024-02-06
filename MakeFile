@@ -1,0 +1,18 @@
+bootstrap:
+	cdk bootstrap
+
+deploy:
+	make build
+	cdk deploy -c config=dev --require-approval=never --method=direct
+
+synth:
+	make build
+	cdk synth
+
+build:
+	echo D | xcopy /f /y poetry.lock services\lambda_layer\ 
+	echo D | xcopy /f /y pyproject.toml services\lambda_layer\ 
+
+build-pipeline:
+	cp -r poetry.lock services/lambda_layer
+	cp -r pyproject.toml services/lambda_layer
